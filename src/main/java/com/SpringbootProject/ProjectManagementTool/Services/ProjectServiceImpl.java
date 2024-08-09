@@ -48,7 +48,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<Project> getAllProjectByTeam(User user, String category, String tag) throws Exception {
        List<Project> projects=projectRepository.findByTeamContainingOrOwner(user,user);
-
+        System.out.println("\n\nCategory"+category);
        if(category!=null)
        {
            projects.stream().filter(projec-> projec.getCategory().equals(category))

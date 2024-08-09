@@ -39,7 +39,6 @@ public class ProjectController {
         User user = userService.findUserProfileByJwt(jwt);
         List<Project>projects = projectService.getAllProjectByTeam(user,Category,tag);
         return new ResponseEntity<>(projects, HttpStatus.OK);
-
     }
 
     @GetMapping("/{projectId}")

@@ -24,7 +24,6 @@ public class CustomUser implements UserDetailsService {
             throw new UsernameNotFoundException("User not found"+username);
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
-
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(),authorities);
     }

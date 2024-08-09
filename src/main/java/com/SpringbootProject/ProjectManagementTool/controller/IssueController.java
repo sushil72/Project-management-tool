@@ -34,8 +34,17 @@ public class IssueController {
     @PostMapping
     public ResponseEntity<IssueDTO> createIssue(@RequestBody IssueRequest issueReq ,
                                                 @RequestHeader("Authorization") String jwt) throws Exception {
+//        User tokerUser = userService.findUserProfileByJwt(jwt);
+//        User user = userService.findUserByid(tokerUser.getId());
         User tokerUser = userService.findUserProfileByJwt(jwt);
+        if (tokerUser == null || tokerUser.getId() == null) {
+            throw new IllegalArgumentException("User not found or User ID is null.");
+        }
+
         User user = userService.findUserByid(tokerUser.getId());
+        if (user == null) {
+            throw new IllegalArgumentException("User not found for ID: " + tokerUser.getId());
+        }
         IssueDTO issueDTO = null;
         if(user != null) {
             Issue createdIssue = issueService.createIssue( issueReq,tokerUser);
