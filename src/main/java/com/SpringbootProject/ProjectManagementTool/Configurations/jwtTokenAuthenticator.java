@@ -31,12 +31,16 @@ public class jwtTokenAuthenticator extends OncePerRequestFilter {
                 Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
                 String email = String.valueOf(claims.get("email"));
                 String authorities = String.valueOf(claims.get("authorities"));
+                System.out.println("JWT Token Email: " + email);
+                System.out.println("JWT Token Authorities: " + authorities);
 
                 List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
                 Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, auths);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
             }catch(Exception e){
+                System.err.println("Invalid Token: " + e.getMessage());
+
                 throw new BadCredentialsException("Invalid Token....");
             }
 

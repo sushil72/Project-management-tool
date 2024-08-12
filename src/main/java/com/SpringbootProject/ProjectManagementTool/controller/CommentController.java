@@ -14,21 +14,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/comments")
+@RequestMapping("/api/comment")
 public class CommentController {
     @Autowired
     private CommentService commentService;
     @Autowired
     private UserService userService;
 
-    @PostMapping()
+    @PostMapping("/createComments")
     public ResponseEntity<?> addComment(@RequestBody CreateCommentRequest createCommentRequest, @RequestHeader("Authorization") String jwt) throws Exception {
-        User user = userService.findUserByEmail(jwt);
+        System.out.println("comment is working.... ");
+        User user = userService.findUserProfileByJwt(jwt);
+        System.out.println("\n content = "+createCommentRequest.getContent());
         Comment createdComment = commentService.createComment(createCommentRequest.getIssueId(),
                 user.getId(),
                 createCommentRequest.getContent());
         return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
-
     }
 
     @DeleteMapping("/{commentId}")
