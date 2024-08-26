@@ -19,7 +19,6 @@ The **Project Management Tool** is a comprehensive web application designed to f
 
 - **Project Management:** Create and manage multiple projects with task tracking, deadlines, and milestones.
 - **User Authentication:** Secure login and registration with JWT-based authentication.
-- **Role-Based Access Control:** Different access levels for project managers, team members, and admins.
 - **Real-Time Collaboration:** Chat and communication tools for teams to collaborate efficiently.
 - **Notifications:** Email notifications for task assignments, project updates, and deadlines.
 - **Payment Integration:** Seamless payment processing for project-related services.
